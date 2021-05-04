@@ -1,0 +1,12 @@
+baseURL: "https://ateon.ch"
+title: "Ateon"
+
+languageCode: "en"
+
+Params:
+    # social links
+    email: "mailto://gewlar@ateon.ch"
+    linkedin: "https://www.linkedin.com/in/luca-schafroth-a7b9b0129/"
+    github: "https://github.com/gewlar"
+
+    showReadMore: true

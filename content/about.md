@@ -1,7 +1,6 @@
 +++
-title = "About Hugo"
-description = "Hugo, the world’s fastest framework for building websites."
-date = 2020-04-11T19:15:32+08:00
+title = "About"
+date = 2020-04-28T19:15:32+08:00
 showLicense = false
 showToc = false
 +++
