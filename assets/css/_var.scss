@@ -1,13 +1,20 @@
-// COLORS
-$teal: #63BDA2;
-$teal-darker: #359377;
-$gray-background: #F7F7F7;
-$gray-table-border: #EEEEEE;
-$gray-lightest: #D2D2D2;
-$gray-light: #ABABAB;
-$gray-medium: #898989;
-$gray-dark: #5F5F5F;
-$highlight: #FFEC5C;
+$light-color-primary:#63BDA2 !default;
+$light-color-secondary: #359377 !default;
+$light-color-focus: #55A38C !default;
+$light-color-mute: #ABABAB !default;
+$light-color-font: #5F5F5F !default;
+$light-color-divider: #e5e2e4 !default;
+$light-color-bg: #fffffd !default;
+$light-color-codebg: #f6f8fa !default;
+
+$dark-color-primary: #63BDA2 !default;
+$dark-color-secondary: #69C9AC !default;
+$dark-color-focus: #e6e6e6 !default;
+$dark-color-mute: #ABABAB !default;
+$dark-color-font: #c0c0c0 !default;
+$dark-color-divider: #4d5158 !default;
+$dark-color-bg: #2f3136 !default;
+$dark-color-codebg: #414449 !default;
 
 // FONTS
 $serif: "Noto Serif","Segoe UI","Helvetica Neue",Helvetica,Roboto,FreeSans,serif;

@@ -18,6 +18,9 @@
         cursor: pointer;
         font-size: 1.25rem;
 
+        background-color: var(--color-divider);  
+        color: var(--color-primary);
+
         &:first-child {
             border-radius: 0.25rem 0.25rem 0 0;
             font-size: 1.125rem;
@@ -27,6 +30,13 @@
             border-radius: 0 0 0.25rem 0.25rem;
             font-size: 1.325rem;
         }
+    }
+    div:hover {
+        background-color: var(--color-primary);
+        color: var(--color-divider);
+    }
+    div + div {
+        border-top: 2px solid var(--color-bg);
     }
 }
 

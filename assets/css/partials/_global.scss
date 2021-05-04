@@ -1,0 +1,26 @@
+html,
+body {
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+html {
+    margin: 0;
+    line-height: 170%;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+}
+
+body {
+    background-color: var(--color-bg);
+    color: var(--color-font);  
+    @include link-1();
+
+    font-family: $sans-serif;
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+.not-found-title {
+    margin-bottom: 0em;
+}
