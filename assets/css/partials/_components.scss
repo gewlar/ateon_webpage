@@ -40,14 +40,18 @@
     }
 }
 
+/*
 @media screen and (min-width: $width-md) {
+    
     .btn div:first-child {
         display: none;
     }
+    
     .btn div:nth-child(2) {
         border-radius: 0.25rem 0.25rem 0 0;
     }
 }
+*/
 
 .post-player-wrapper {
     margin: 0.25rem 0.125rem 1rem 0.125rem !important;

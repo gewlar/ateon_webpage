@@ -10,3 +10,4 @@ Params:
     github: "https://github.com/gewlar"
 
     showReadMore: true
+    RSSLink: "/blog/index.xml"

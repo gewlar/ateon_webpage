@@ -35,8 +35,6 @@ h2 {
     a {
         text-decoration: none;
         position: relative;
-        text-shadow: 0px -2px 0 var(--color-bg), 0px -1px 0 var(--color-bg), 0px 0px 0 var(--color-bg), 2px -2px 0 var(--color-bg), 2px -1px 0 var(--color-bg), 2px 0px 0 var(--color-bg), -2px -2px 0 var(--color-bg), -2px -1px 0 var(--color-bg), -2px 0px 0 var(--color-bg), 1px -2px 0 var(--color-bg), 1px -1px 0 var(--color-bg), 1px 0px 0 var(--color-bg), -1px -2px 0 var(--color-bg), -1px -1px 0 var(--color-bg), -1px 0px 0 var(--color-bg), 0px -2px 0 var(--color-bg), 0px -1px 0 var(--color-bg), 0px 0px 0 var(--color-bg);
-        box-shadow: 0 -1px 0 0 var(--color-bg) inset, 0 -2px 0 0 transparent inset;
         background-size: 1px 1em;
         position: relative;
         transition: all 0.6s cubic-bezier(0.075, 0.82, 0.165, 1);

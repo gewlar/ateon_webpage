@@ -1,6 +1,7 @@
 'use-strict'
 
 window.onload = wrapTable();
+window.onload = loadBaseTheme();
 
 // Wrap tables in a div so that they scroll responsively. 
 function wrapTable() {
@@ -13,6 +14,10 @@ function wrapTable() {
     });
 };
 
+function loadBaseTheme() {
+    setTheme(getNowTheme());
+}
+
 // get current theme
 function getNowTheme() {
     let nowTheme = document.body.getAttribute('data-theme');
@@ -21,6 +26,13 @@ function getNowTheme() {
     } else {
         return nowTheme === 'dark' ? 'dark' : 'light';
     }
+}
+
+function setTheme(theme) {
+    document.body.setAttribute('data-theme', theme);
+    document.getElementsByName("webring").forEach((el) => {
+        el.setAttribute('theme', "/theme/"+theme+".json");
+    });
 }
 
 // to-top button
@@ -36,16 +48,16 @@ document.querySelector('.btn .btn-toggle-mode').addEventListener('click', () => 
   
     if (domTheme === 'auto') {
         // if now in auto mode, switch to user mode
-        document.body.setAttribute('data-theme', nowTheme === 'light' ? 'dark' : 'light');
+        setTheme(nowTheme === 'light' ? 'dark' : 'light');
         localStorage.setItem('ateon_data-theme', nowTheme === 'light' ? 'dark' : 'light');
     } else if (domTheme === 'light') {
         // if now in user mode and light mode
-        document.body.setAttribute('data-theme', 'dark');
+        setTheme('dark');
         // if the theme want to switch is system theme
         localStorage.setItem('ateon_data-theme', systemTheme === 'dark' ? 'auto' : 'dark');
     } else {
         // if now in user mode and dark mode
-        document.body.setAttribute('data-theme', 'light');
+        setTheme('light');
         // if the theme want to switch is system theme
         localStorage.setItem('ateon_data-theme', systemTheme === 'light' ? 'auto' : 'light');
     }
