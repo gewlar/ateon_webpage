@@ -1,42 +1,49 @@
-baseURL: 'https://ateon.ch'
-title: Ateon
-theme: LoveIt
-languageCode: en
-languageName: English
+baseURL: "https://ateon.ch"
+title: "Ateon"
+theme: "LoveIt"
+languageCode: "en"
+languageName: "English"
 author:
-  name: gewlar
+  name: "gewlar"
 
 menu:
   main:
     - weight: 1
-      identifier: posts
+      identifier: "posts"
       pre: ''
       post: ''
-      name: Posts
-      url: /posts/
+      name: "Posts"
+      url: "/posts/"
+      title: ''
+    - weight: 2
+      identifier: "about"
+      pre: ''
+      post: ''
+      name: "About"
+      url: "/about"
       title: ''
 
 params:
-  defaultTheme: auto
+  defaultTheme: "auto"
   dateFormat: 02.01.2006
-  title: Ateon
-  description: Ateon
+  title: "Ateon"
+  description: "Ateon"
 
   header:
     title:
-      name: Ateon
+      name: "Ateon"
 
   footer:
     hugo: false
     since: 2021
 
   social:
-    github: gewlar
-    LinkedIn: luca-schafroth-a7b9b0129
+    github: "gewlar"
+    LinkedIn: "luca-schafroth-a7b9b0129"
     RSS: true
     
   app:
-    title: Ateon
+    title: "Ateon"
 
   section:
     dateFormat: "02.01"
@@ -45,12 +52,12 @@ params:
 
   search:
     enable: true
-    type: lunr
+    type: "lunr"
     contentLength: 4000
     placeholder: ''
     maxResultLength: 10
     snippetLength: 30
-    highlightTag: em
+    highlightTag: "em"
     absoluteURL: false
     algolia:
       index: ''
@@ -64,8 +71,13 @@ params:
       subtitle: ''
       
   page:
+    rssFullText: false
     share:
       enable: false
+
 markup:
   highlight:
     noClasses: false
+
+outputs:
+  home: ["HTML","RSS","JSON"]
