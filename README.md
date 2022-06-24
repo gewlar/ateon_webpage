@@ -1,1 +1,1 @@
-webpage
+Run `hugo server -D` for development environment or `hugo -D` to build

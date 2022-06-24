@@ -1,9 +1,0 @@
-{{ $options := (dict "targetPath" "assets/js/main.min.js" "minify" true "target" "es2015" "format" "iife") }}
-{{ $built := resources.Get "js/main.js" | js.Build $options }}
-<script defer src="{{ $built.RelPermalink }}"></script>
-
-<script async src="https://xyquadrat.ch/polyring/embed.js" charset="utf-8"></script>
-
-{{ if or .Params.math .Site.Params.math }}
-  {{ partial "math.html" . }}
-{{ end }}

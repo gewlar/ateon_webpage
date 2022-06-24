@@ -1,6 +1,7 @@
 ---
 title: Using steganography to send messages hidden in an image
 date: 2021-04-19T11:17:40+02:00
+lastmod: 2021-04-19T11:17:40+02:00
 description: A brief example of steganography
 draft: false
 ---

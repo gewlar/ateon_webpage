@@ -1,6 +1,7 @@
 ---
 title: Some technical information about the Polyring widget
 date: 2021-04-27T09:03:40+02:00
+lastmod: 2021-04-27T09:03:40+02:00
 description: Some technical information about the Polyring widget
 draft: false
 tags: ["css", "javascript"]
