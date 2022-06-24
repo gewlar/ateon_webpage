@@ -39,7 +39,7 @@ themes = {
 var url = this.themes[newVal] ?? newVal;
 ```
 
-The corresponding internal or external file is then loaded, parsed as json and each css property is updated. You can find an example for such theme file on [xyquadrat].(https://xyquadrat.ch/polyring/assets/themes/default.json)
+The corresponding internal or external file is then loaded, parsed as json and each css property is updated. You can find an example for such theme file on [xyquadrat](https://xyquadrat.ch/polyring/assets/themes/default.json).
 ```js
 fetch(url).then(response => response.json())
     .then(val => {
