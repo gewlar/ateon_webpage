@@ -4,7 +4,8 @@ date: 2021-04-27T09:03:40+02:00
 lastmod: 2021-04-27T09:03:40+02:00
 description: Some technical information about the Polyring widget
 draft: false
-tags: ["css", "javascript"]
+rssFullText: true
+tags: ["css", "javascript", "web component"]
 ---
 
 As those following the news about the Polyring may have read on [xyquadrat](https://xyquadrat.ch/2021/04/24/polyring-widget-theming.html), our widget can now be styled with themes. For those interested about the inner workings I will provide some technical information here. 

@@ -4,6 +4,7 @@ date: 2021-04-19T11:17:40+02:00
 lastmod: 2021-04-19T11:17:40+02:00
 description: A brief example of steganography
 draft: false
+rssFullText: true
 ---
 
 There are multiple ways to send a secret message. The best known and usually used, especially over the internet, is by encrypting the message and later decrypting it.
