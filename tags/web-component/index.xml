@@ -1,4 +1,4 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Ateon</title><link>https://ateon.ch/</link><description>Ateon</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 27 Apr 2021 09:03:40 +0200</lastBuildDate><atom:link href="https://ateon.ch/index.xml" rel="self" type="application/rss+xml"/><item><title>Some technical information about the Polyring widget</title><link>https://ateon.ch/posts/some-technical-information-about-the-polyring-widgett/</link><pubDate>Tue, 27 Apr 2021 09:03:40 +0200</pubDate><author>gewlar</author><guid>https://ateon.ch/posts/some-technical-information-about-the-polyring-widgett/</guid><description><![CDATA[<p>As those following the news about the Polyring may have read on <a href="https://xyquadrat.ch/2021/04/24/polyring-widget-theming.html" target="_blank" rel="noopener noreffer ">xyquadrat</a>, our widget can now be styled with themes. For those interested about the inner workings I will provide some technical information here.</p>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>web component - Tag - Ateon</title><link>https://ateon.ch/tags/web-component/</link><description>web component - Tag - Ateon</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 27 Apr 2021 09:03:40 +0200</lastBuildDate><atom:link href="https://ateon.ch/tags/web-component/" rel="self" type="application/rss+xml"/><item><title>Some technical information about the Polyring widget</title><link>https://ateon.ch/posts/some-technical-information-about-the-polyring-widgett/</link><pubDate>Tue, 27 Apr 2021 09:03:40 +0200</pubDate><author>gewlar</author><guid>https://ateon.ch/posts/some-technical-information-about-the-polyring-widgett/</guid><description><![CDATA[<p>As those following the news about the Polyring may have read on <a href="https://xyquadrat.ch/2021/04/24/polyring-widget-theming.html" target="_blank" rel="noopener noreffer ">xyquadrat</a>, our widget can now be styled with themes. For those interested about the inner workings I will provide some technical information here.</p>
 <p>The component make heavy use of <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties" target="_blank" rel="noopener noreffer ">css variables</a> alongside the attribute <code>theme</code>, which can be set on the component. Let&rsquo;s walk through the needed setup, which consists of both javascript code and css descriptions.</p>
 <h3 id="javascript-setup">Javascript setup</h3>
 <p>Fortunately webcomponents already have the functionally to observe attributes. We can simply declare an attribute as observable using a built-in funciton. This allows for hot-switching instead of only loading the attribute once in the beginning.</p>
@@ -45,25 +45,4 @@
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></div><p>Unfortunately these css custom properties can not be used in scss functions like <code>scale-color</code>. As those are parsed at build time, but the value from a css variables is only present at run time. However css variables can be used in css functions like <code>calc</code>.</p>
 <h3 id="conclusion">Conclusion</h3>
-<p>Css custom properties allow for relatively easy theme support both to your website as well as webcomponents. Many css frameworks like <a href="https://materializecss.com/" target="_blank" rel="noopener noreffer ">Materialize</a> or <a href="https://getbootstrap.com/" target="_blank" rel="noopener noreffer ">Bootstrap</a> make heavy use of css variables to style elements dynamically.</p>]]></description></item><item><title>Using steganography to send messages hidden in an image</title><link>https://ateon.ch/posts/using-steganography-to-send-messages-hidden-in-an-image/</link><pubDate>Mon, 19 Apr 2021 11:17:40 +0200</pubDate><author>gewlar</author><guid>https://ateon.ch/posts/using-steganography-to-send-messages-hidden-in-an-image/</guid><description><![CDATA[<p>There are multiple ways to send a secret message. The best known and usually used, especially over the internet, is by encrypting the message and later decrypting it.
-But it&rsquo;s not the only possibilty. Steganography is the process of hiding information within another carrier medium, fooling everyone else into thinking that the carrier is the only message.</p>
-<p>The basic principle ist simple:</p>
-<ul>
-<li>Add a start and end tag to our message.</li>
-<li>Convert the message to a byte string using UTF8.</li>
-<li>Overwriting the least significant bits in each pixel with our byte string until the whole message is stored.</li>
-</ul>
-<p>Let&rsquo;s look at the last step if we want to use the two least significant bits:
-As an example we want to store <code>10</code> in a channel that currently stores <code>10100111</code>. First we apply a bit mask with the &lsquo;and&rsquo; operation, then we apply our data with an &lsquo;or&rsquo; operation. This pixel data is then written back into the image.</p>
-<pre tabindex="0"><code>	10100111
-&amp;	11111100
-|	00000010
-
-= 	10100110
-</code></pre><p>If only using the least siginificant bits, the difference can not be seen. Even detecting that the image has been changed is difficult if the original can not be used as a reference.</p>
-<p>Here are the <a href="https://github.com/gewlar/steganography" target="_blank" rel="noopener noreffer ">source files</a> if you want to try out the application.</p>
-<h3 id="further-reading">Further reading:</h3>
-<ul>
-<li><a href="https://www.garykessler.net/library/steganography.html" target="_blank" rel="noopener noreffer ">https://www.garykessler.net/library/steganography.html</a></li>
-</ul>
-]]></description></item></channel></rss>
+<p>Css custom properties allow for relatively easy theme support both to your website as well as webcomponents. Many css frameworks like <a href="https://materializecss.com/" target="_blank" rel="noopener noreffer ">Materialize</a> or <a href="https://getbootstrap.com/" target="_blank" rel="noopener noreffer ">Bootstrap</a> make heavy use of css variables to style elements dynamically.</p>]]></description></item></channel></rss>
