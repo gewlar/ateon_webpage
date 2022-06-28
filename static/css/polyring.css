@@ -1,0 +1,17 @@
+body[theme="dark"] webring-banner {
+    --background-color: transparent;
+    --outer-border-color: #DDD;
+    --inner-border-color: #DDD;
+    --href-color: #55bde2 ;
+    --href-color-active: #55bde2 ;
+    --text-color: #a9a9b3;
+}
+
+body webring-banner {
+    --background-color: transparent;
+    --outer-border-color: #DDD;
+    --inner-border-color: #DDD;
+    --href-color: #2d96bd ;
+    --href-color-active: #2d96bd ;
+    --text-color: #161209;
+}
