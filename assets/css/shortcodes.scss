@@ -9,7 +9,6 @@ body webring-banner {
     --text-color: #161209;
 }
 
-
 body[theme="dark"] webring-banner {
     --background-color: transparent;
     --outer-border-color: #ddd;
@@ -20,3 +19,13 @@ body[theme="dark"] webring-banner {
 }
 
 //#endregion
+
+body svg.themed {
+    stroke: #161209;
+    fill: #161209;
+}
+
+body[theme="dark"] svg.themed {
+    stroke: #a9a9b3;
+    fill: #a9a9b3;
+}
