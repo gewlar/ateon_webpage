@@ -10,7 +10,7 @@ tags: ["css", "javascript", "web component"]
 
 As those following the news about the Polyring may have read on [xyquadrat](https://xyquadrat.ch/2021/04/24/polyring-widget-theming.html), our widget can now be styled with themes. For those interested about the inner workings I will provide some technical information here. 
 
-The component make heavy use of [css variables](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties) alongside the attribute `theme`, which can be set on the component. Let's walk through the needed setup, which consists of both javascript code and css descriptions.
+The component makes heavy use of [css variables](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties) alongside the attribute `theme`, which can be set on the component. Let's walk through the needed setup, which consists of both javascript code and css descriptions.
 <!--more-->
 
 ### Javascript setup
