@@ -21,7 +21,7 @@ How can you determine your next move?
 Let us start by labeling the fields of our grid. Each game is then a series of numbers chosen alternately by you and your opponent.
 Instead of writing a list of all possible games that could be played, we draw them up as a tree:
 
-{{< image src="/gameTree/tictactoe.svg" width="100%" linked=false >}}
+{{< svg src="static/gameTree/tictactoe-min.svg">}}
 
 In this case `F 0` stands for marking the field `0`. The children of a node now make up all possible next moves from this state of the game. Once the game ends the corresponding branch will stop as well and we have a leaf (labeled by `v`).
 
@@ -37,7 +37,7 @@ Additionally, we are interested in the number of leaves that need to be evaluate
 
 {{< /admonition >}}
 
-{{< image src="/gameTree/binaryTree.svg" width="100%" linked=false >}}
+{{< svg src="static/gameTree/binaryTree.svg">}}
 
 For ease of presentation I only consider full binary trees with values in $\lbrace 0,1 \rbrace$. 
 Let such a tree be denoted as $T_{2,k}$, with $k$ layers of MAX nodes and $k$ layers of MIN nodes. Hence, the total height of the tree is $2k$ and it has $4^{k}$ leaves. As the values can be interpreted as boolean values, the two types of internal nodes can be regarded as AND respectively OR operations.
@@ -62,7 +62,7 @@ First consider the two cases for $k=1$.
 If a MIN root evaluates to 0, at least one of its child MAX nodes must evaluate to 0. With probability $\frac{1}{2}$ this node is selected first. In turn both its children must evaluate to 0 as well. 
 Thus, picking the correct node results in $2$ leaves being evaluated ($\red{\text{red part}}$).
 
-{{< image src="/gameTree/induction0.svg" width="100%" linked=false >}}
+{{< svg src="static/gameTree/induction0.svg">}}
 
 The other node is picked with probability $\frac{1}{2}$ as well. As it evaluates to 1, it must have at least on child with value 1. This child is again picked with probability $\frac{1}{2}$ ($\blue{\text{blue part}}$). In that case the blue and red nodes have to be considered for a total of 3. 
 
@@ -83,7 +83,7 @@ The expected number of leaves that have to be considered is thus:
 
 On the flip side, if a MIN node evaluates to 1 both its children must be considered. But the child nodes are MAX nodes and must have at least one child node with value 1 again. With probability $\frac{1}{2}$ this node is chosen first in each case.
 
-{{< image src="/gameTree/induction1.svg" width="100%" linked=false >}}
+{{< svg src="static/gameTree/induction1.svg">}}
 
 Once again there is also a $\frac{1}{2}$ chance for each MAX node to select the wrong leaf first, in which case both its leaves must be evaluated.
 
@@ -132,6 +132,8 @@ As previously mentioned, the cases for a MAX root can be proved analogously as t
 This concludes that in all cases the expected number of leaves that the randomized algorithm has to evaluate is less than or equal to $3^{k}$. Of course the worst case still has to evaluate all leaves.
 
 Using a randomized algorithm it is, thus, possible to achieve an expected number of steps, which is strictly better than the deterministic approach.
+
+For games with a lot of decisions like chess, the randomized algorithm is still much to slow to process the whole tree. In such cases a partial tree that only evaluates to a certain depth can be used. The values of the leaves must then be determined by the state at that time. For example giving each chess piece you hold a value depending on its position and subtracting the score of your opponent.
 
 ###### References
 Motwani R. \& Raghavan P. (1995). *Randomized Algorithms*
