@@ -3,7 +3,7 @@ title: "Randomized Algorithms: Game Tree Evaluation"
 subtitle: ""
 date: 2022-06-27T13:30:47+02:00
 lastmod: 2022-06-27T13:30:47+02:00
-draft: true
+draft: false
 description: "Randomized Algorithms: Game Tree Evaluation"
 
 tags: ["algorithms"]
@@ -21,7 +21,7 @@ How can you determine your next move?
 Let us start by labeling the fields of our grid. Each game is then a series of numbers chosen alternately by you and your opponent.
 Instead of writing a list of all possible games that could be played, we draw them up as a tree:
 
-{{< svg src="static/gameTree/tictactoe-min.svg">}}
+{{< svg src="static/gameTree/tictactoe.svg">}}
 
 In this case `F 0` stands for marking the field `0`. The children of a node now make up all possible next moves from this state of the game. Once the game ends the corresponding branch will stop as well and we have a leaf (labeled by `v`).
 
