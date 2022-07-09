@@ -20,12 +20,54 @@ body[theme="dark"] webring-banner {
 
 //#endregion
 
-body svg.themed {
-    stroke: #161209;
-    fill: #161209;
+body {
+    svg.themed {
+        stroke: #161209;
+        fill: #161209;
+    }
+
+    svg {
+        .stroke {
+            stroke: #161209;
+        }
+        .fill {
+            fill: #161209;
+        }
+
+        .fill.red {
+            fill: rgb(223, 0, 48);
+        }
+        .fill.blue {
+            fill: rgb(100, 149, 237);
+        }
+        .fill.green {
+            fill: rgb(40, 174, 123);
+        }
+    }
 }
 
-body[theme="dark"] svg.themed {
-    stroke: #a9a9b3;
-    fill: #a9a9b3;
+body[theme="dark"] {
+    svg.themed {
+        stroke: #a9a9b3;
+        fill: #a9a9b3;
+    }
+
+    svg {
+        .stroke {
+            stroke: #a9a9b3;
+        }
+        .fill {
+            fill: #a9a9b3;
+        }
+
+        .fill.red {
+            fill: rgb(223, 0, 48);
+        }
+        .fill.blue {
+            fill: rgb(100, 149, 237);
+        }
+        .fill.green {
+            fill: rgb(40, 174, 123);
+        }
+    }
 }
