@@ -1,8 +1,8 @@
 ---
 title: "Randomized Algorithms: Game Tree Evaluation"
 subtitle: ""
-date: 2022-06-27T13:30:47+02:00
-lastmod: 2022-06-27T13:30:47+02:00
+date: 2022-07-09T17:40:00+02:00
+lastmod: 2022-07-09T17:40:00+02:00
 draft: false
 description: "Randomized Algorithms: Game Tree Evaluation"
 
