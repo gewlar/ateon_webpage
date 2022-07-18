@@ -1,4 +1,97 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>web component - Tag - Ateon</title><link>https://ateon.ch/tags/web-component/</link><description>web component - Tag - Ateon</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 27 Apr 2021 09:03:40 +0200</lastBuildDate><atom:link href="https://ateon.ch/tags/web-component/" rel="self" type="application/rss+xml"/><item><title>Some technical information about the Polyring widget</title><link>https://ateon.ch/posts/some-technical-information-about-the-polyring-widgett/</link><pubDate>Tue, 27 Apr 2021 09:03:40 +0200</pubDate><author>gewlar</author><guid>https://ateon.ch/posts/some-technical-information-about-the-polyring-widgett/</guid><description><![CDATA[<p>As those following the news about the Polyring may have read on <a href="https://xyquadrat.ch/2021/04/24/polyring-widget-theming.html" target="_blank" rel="noopener noreffer ">xyquadrat</a>, our widget can now be styled with themes. For those interested about the inner workings I will provide some technical information here.</p>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>web component - Tag - Ateon</title><link>https://ateon.ch/tags/web-component/</link><description>web component - Tag - Ateon</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 18 Jul 2022 16:11:44 +0200</lastBuildDate><atom:link href="https://ateon.ch/tags/web-component/" rel="self" type="application/rss+xml"/><item><title>Loading Sass files with Lit</title><link>https://ateon.ch/posts/lit-scss-loading/</link><pubDate>Mon, 18 Jul 2022 16:11:44 +0200</pubDate><author>gewlar</author><guid>https://ateon.ch/posts/lit-scss-loading/</guid><description><![CDATA[<p>Like <a href="https://polymer-library.polymer-project.org/" target="_blank" rel="noopener noreffer ">Polymer</a> before, <a href="https://lit.dev/" target="_blank" rel="noopener noreffer ">Lit-Element</a> uses javascript or typescript files for code, templates and styles by default, to enable the use of javascript variables. While this may be useful in some cases, personally I prefer having my style definitions in separate files mainly to benefit from <a href="https://sass-lang.com/" target="_blank" rel="noopener noreffer ">Sass</a>, but also the added benefit of editor assistance like highlighting and autocompletion. Fortunately this can be changed with a bundler like <a href="https://webpack.js.org/" target="_blank" rel="noopener noreffer ">Webpack</a>.</p>
+<div class="details admonition tip">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>What is Lit?<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p>Lit Element is a <a href="https://developer.mozilla.org/en-US/docs/Web/Web_Components" target="_blank" rel="noopener noreffer ">Web Component</a> library. It adds some useful boilerplate and typescript definitions on top of the Web Component standards.
+A Web Component itself is simply a custom element like any other default html element. But they encapsulate their code and styling from the rest of the page, which makes them highly modular. In a way their job is similar to classes in object-oriented programming languages.</p>
+<p>Many well known Libraries like <a href="https://angular.io/" target="_blank" rel="noopener noreffer ">Angular</a> or <a href="https://reactjs.org/" target="_blank" rel="noopener noreffer ">React</a> make heavy use of Web Components.</p>
+</div>
+        </div>
+    </div>
+<h3 id="previous-setup">Previous Setup</h3>
+<p>Previously with Polymer I used the <a href="https://github.com/superjose/polymer-css-loader" target="_blank" rel="noopener noreffer ">polymer-css-loader</a> alongside its requirements to import stylesheets in javascript modules.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="p">...,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">module</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">rules</span><span class="o">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">      <span class="p">...,</span>
+</span></span><span class="line"><span class="cl">      <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">test</span><span class="o">:</span> <span class="sr">/\.css|\.s(c|a)ss$/</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">use</span><span class="o">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">          <span class="nx">babel</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="nx">loader</span><span class="o">:</span> <span class="s1">&#39;polymer-css-loader&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">          <span class="nx">options</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">minify</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">url</span><span class="o">:</span> <span class="kc">false</span>
+</span></span><span class="line"><span class="cl">          <span class="p">},</span>
+</span></span><span class="line"><span class="cl">        <span class="p">},</span> <span class="s1">&#39;extract-loader&#39;</span><span class="p">,</span> <span class="s1">&#39;css-loader&#39;</span><span class="p">,</span> <span class="s1">&#39;resolve-url-loader&#39;</span><span class="p">,</span><span class="s1">&#39;sass-loader?sourceMap&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">      <span class="p">},</span>
+</span></span><span class="line"><span class="cl">      <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">test</span><span class="o">:</span> <span class="sr">/\.(png|jpg|gif|svg)$/</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">use</span><span class="o">:</span> <span class="p">[{</span>
+</span></span><span class="line"><span class="cl">          <span class="nx">loader</span><span class="o">:</span> <span class="s1">&#39;url-loader&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">          <span class="nx">options</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">limit</span><span class="o">:</span> <span class="mi">10</span> <span class="o">*</span> <span class="mi">1024</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">outputPath</span><span class="o">:</span> <span class="s1">&#39;assets&#39;</span>
+</span></span><span class="line"><span class="cl">          <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}]</span>
+</span></span><span class="line"><span class="cl">      <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="p">]</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>There actually exists a continuation of it for lit elements called <a href="https://github.com/bennypowers/lit-css" target="_blank" rel="noopener noreffer ">lit-css-loader</a>. Unfortunately <a href="https://github.com/peerigon/extract-loader" target="_blank" rel="noopener noreffer ">extract-loader</a> seems to be broken in Webpack 5, especially when loading images from Sass files.</p>
+<h3 id="new-setup">New Setup</h3>
+<p>Instead the <a href="https://webpack.js.org/loaders/css-loader/" target="_blank" rel="noopener noreffer ">css-loader</a> can now be used on its own to export the stylesheets in the required format.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="p">...,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">module</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">rules</span><span class="o">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">      <span class="p">...,</span>
+</span></span><span class="line"><span class="cl">      <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">test</span><span class="o">:</span> <span class="sr">/\.css|\.s(c|a)ss$/</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">use</span><span class="o">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">          <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">loader</span><span class="o">:</span> <span class="s1">&#39;css-loader&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">options</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">              <span class="nx">esModule</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">              <span class="nx">exportType</span><span class="o">:</span> <span class="s2">&#34;css-style-sheet&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">          <span class="p">},</span>
+</span></span><span class="line"><span class="cl">          <span class="s1">&#39;resolve-url-loader&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">          <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">loader</span><span class="o">:</span> <span class="s1">&#39;sass-loader&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">options</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">              <span class="nx">sourceMap</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">          <span class="p">}]</span>
+</span></span><span class="line"><span class="cl">      <span class="p">},</span>
+</span></span><span class="line"><span class="cl">      <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">test</span><span class="o">:</span> <span class="sr">/\.(png|jpg|gif|svg)$/</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;asset&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">parser</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="nx">dataUrlCondition</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">maxSize</span><span class="o">:</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">1024</span> <span class="c1">// 4kb
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>          <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">generator</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="nx">filename</span><span class="o">:</span> <span class="s1">&#39;assets/images/[name].[ext]&#39;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">]</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Some details about the different loaders used:</p>
+<ul>
+<li><a href="https://www.npmjs.com/package/sass-loader" target="_blank" rel="noopener noreffer ">sass-loader</a> is needed to compile sass to pure css.</li>
+<li>Webpack expects relative paths to be in relation to the root file. To fix this <a href="https://www.npmjs.com/package/resolve-url-loader" target="_blank" rel="noopener noreffer ">resolve-url-loader</a> re-writes those paths to correctly load files.</li>
+<li>Then css-loader translates CSS to Javascript.</li>
+<li>The url-loader to load images has now been replaced by the <a href="https://webpack.js.org/guides/asset-modules/" target="_blank" rel="noopener noreffer ">Asset Module</a> from Webpack 5. Images smaller than 4kb will be inlined, while larger images are stores as a separate file.</li>
+</ul>
+<p>Hopefully this quick summary will save you some time if you are working with Lit-Elements.</p>
+<h3 id="additional-remarks">Additional remarks</h3>
+<p>As the <a href="https://web.dev/css-module-scripts/" target="_blank" rel="noopener noreffer ">CSS Module Scripts</a> feature gets deployed to all browsers this setup might become simpler.</p>]]></description></item><item><title>Some technical information about the Polyring widget</title><link>https://ateon.ch/posts/some-technical-information-about-the-polyring-widgett/</link><pubDate>Tue, 27 Apr 2021 09:03:40 +0200</pubDate><author>gewlar</author><guid>https://ateon.ch/posts/some-technical-information-about-the-polyring-widgett/</guid><description><![CDATA[<p>As those following the news about the Polyring may have read on <a href="https://xyquadrat.ch/2021/04/24/polyring-widget-theming.html" target="_blank" rel="noopener noreffer ">xyquadrat</a>, our widget can now be styled with themes. For those interested about the inner workings I will provide some technical information here.</p>
 <p>The component makes heavy use of <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties" target="_blank" rel="noopener noreffer ">css variables</a> alongside the attribute <code>theme</code>, which can be set on the component. Let&rsquo;s walk through the needed setup, which consists of both javascript code and css descriptions.</p>
 <h3 id="javascript-setup">Javascript setup</h3>
 <p>Fortunately webcomponents already have the functionally to observe attributes. We can simply declare an attribute as observable using a built-in funciton. This allows for hot-switching instead of only loading the attribute once in the beginning.</p>
