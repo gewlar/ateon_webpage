@@ -4,7 +4,7 @@ theme: "LoveIt"
 languageCode: "en"
 languageName: "English"
 author:
-  name: "gewlar"
+  name: "Luca Schafroth"
 
 menu:
   main:
@@ -34,7 +34,9 @@ params:
       name: "Ateon"
 
   footer:
+    enable: false
     hugo: false
+    author: false
     since: 2021
 
   social:
@@ -74,7 +76,7 @@ params:
       subtitle: ''
       
   page:
-    rssFullText: false
+    rssFullText: true
     share:
       enable: false
     math:
