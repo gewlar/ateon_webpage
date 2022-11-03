@@ -1,0 +1,14 @@
+{
+  "name": "ateon_webpage",
+  "version": "1.0.0",
+  "repository": "https://github.com/gewlar/ateon_webpage",
+  "author": {
+    "name": "Luca Schafroth"
+  },
+  "scripts": {
+    "install": "npm dedup"
+  },
+  "dependencies": {
+    "lit": "^2.4.0"
+  }
+}

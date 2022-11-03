@@ -1,0 +1,13 @@
+{{ $filename := print "components/" (.Get "name") "/" (.Get "name") ".ts" | string }}
+{{ $compName := print "ateon-" (.Get "name") }}
+
+{{- if .Get "src" -}}
+    {{ $filename := .Get "src" }}
+{{ else if .Get "directory"}}
+    {{ $filename := print "components/" (.Get "directory") "/" (.Get "name") ".ts" | string }}
+{{ end }}
+
+{{ $js := resources.Get $filename | js.Build }}
+<script src='{{ $js.RelPermalink }}'></script>
+{{- print "<" $compName ">" | safeHTML -}}
+{{- print "</" $compName ">" | safeHTML -}}
