@@ -1,4 +1,4 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>javascript - Tag - Ateon</title><link>https://ateon.ch/tags/javascript/</link><description>javascript - Tag - Ateon</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 18 Jul 2022 16:11:44 +0200</lastBuildDate><atom:link href="https://ateon.ch/tags/javascript/" rel="self" type="application/rss+xml"/><item><title>Loading Sass files with Lit</title><link>https://ateon.ch/posts/lit-scss-loading/</link><pubDate>Mon, 18 Jul 2022 16:11:44 +0200</pubDate><author>Luca Schafroth</author><guid>https://ateon.ch/posts/lit-scss-loading/</guid><description><![CDATA[<p>Like <a href="https://polymer-library.polymer-project.org/" target="_blank" rel="noopener noreffer ">Polymer</a> before, <a href="https://lit.dev/" target="_blank" rel="noopener noreffer ">Lit-Element</a> uses javascript or typescript files for code, templates and styles by default, to enable the use of javascript variables. While this may be useful in some cases, personally I prefer having my style definitions in separate files mainly to benefit from <a href="https://sass-lang.com/" target="_blank" rel="noopener noreffer ">Sass</a>, but also the added benefit of editor assistance like highlighting and autocompletion. Fortunately this can be changed with a bundler like <a href="https://webpack.js.org/" target="_blank" rel="noopener noreffer ">Webpack</a>.</p>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Javascript - Tag - Ateon</title><link>https://ateon.ch/tags/javascript/</link><description>Javascript - Tag - Ateon</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 18 Jul 2022 16:11:44 +0200</lastBuildDate><atom:link href="https://ateon.ch/tags/javascript/" rel="self" type="application/rss+xml"/><item><title>Loading Sass files with Lit</title><link>https://ateon.ch/posts/lit-scss-loading/</link><pubDate>Mon, 18 Jul 2022 16:11:44 +0200</pubDate><author>Luca Schafroth</author><guid>https://ateon.ch/posts/lit-scss-loading/</guid><description><![CDATA[<p>Like <a href="https://polymer-library.polymer-project.org/" target="_blank" rel="noopener noreffer ">Polymer</a> before, <a href="https://lit.dev/" target="_blank" rel="noopener noreffer ">Lit-Element</a> uses javascript or typescript files for code, templates and styles by default, to enable the use of javascript variables. While this may be useful in some cases, personally I prefer having my style definitions in separate files mainly to benefit from <a href="https://sass-lang.com/" target="_blank" rel="noopener noreffer ">Sass</a>, but also the added benefit of editor assistance like highlighting and autocompletion. Fortunately this can be changed with a bundler like <a href="https://webpack.js.org/" target="_blank" rel="noopener noreffer ">Webpack</a>.</p>
 <div class="details admonition tip">
         <div class="details-summary admonition-title">
             <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>What is Lit?<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
@@ -12,7 +12,12 @@ A Web Component itself is simply a custom element like any other default html el
     </div>
 <h3 id="previous-setup">Previous Setup</h3>
 <p>Previously with Polymer I used the <a href="https://github.com/superjose/polymer-css-loader" target="_blank" rel="noopener noreffer ">polymer-css-loader</a> alongside its requirements to import stylesheets in javascript modules.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-js"><span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copy to clipboard"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="p">...,</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">module</span><span class="o">:</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">rules</span><span class="o">:</span> <span class="p">[</span>
@@ -40,11 +45,15 @@ A Web Component itself is simply a custom element like any other default html el
 </span></span><span class="line"><span class="cl">      <span class="p">},</span>
 </span></span><span class="line"><span class="cl">    <span class="p">]</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><p>There actually exists a continuation of it for lit elements called <a href="https://github.com/bennypowers/lit-css" target="_blank" rel="noopener noreffer ">lit-css-loader</a>. Unfortunately <a href="https://github.com/peerigon/extract-loader" target="_blank" rel="noopener noreffer ">extract-loader</a> seems to be broken in Webpack 5, especially when loading images from Sass files.</p>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></div></div><p>There actually exists a continuation of it for lit elements called <a href="https://github.com/bennypowers/lit-css" target="_blank" rel="noopener noreffer ">lit-css-loader</a>. Unfortunately <a href="https://github.com/peerigon/extract-loader" target="_blank" rel="noopener noreffer ">extract-loader</a> seems to be broken in Webpack 5, especially when loading images from Sass files.</p>
 <h3 id="new-setup">New Setup</h3>
 <p>Instead the <a href="https://webpack.js.org/loaders/css-loader/" target="_blank" rel="noopener noreffer ">css-loader</a> can now be used on its own to export the stylesheets in the required format.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-js"><span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copy to clipboard"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="p">...,</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">module</span><span class="o">:</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">rules</span><span class="o">:</span> <span class="p">[</span>
@@ -81,8 +90,7 @@ A Web Component itself is simply a custom element like any other default html el
 </span></span><span class="line"><span class="cl">      <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    <span class="p">]</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><p>Some details about the different loaders used:</p>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></div></div><p>Some details about the different loaders used:</p>
 <ul>
 <li><a href="https://www.npmjs.com/package/sass-loader" target="_blank" rel="noopener noreffer ">sass-loader</a> is needed to compile sass to pure css.</li>
 <li>Webpack expects relative paths to be in relation to the root file. To fix this <a href="https://www.npmjs.com/package/resolve-url-loader" target="_blank" rel="noopener noreffer ">resolve-url-loader</a> re-writes those paths to correctly load files.</li>
@@ -95,24 +103,41 @@ A Web Component itself is simply a custom element like any other default html el
 <p>The component makes heavy use of <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties" target="_blank" rel="noopener noreffer ">css variables</a> alongside the attribute <code>theme</code>, which can be set on the component. Let&rsquo;s walk through the needed setup, which consists of both javascript code and css descriptions.</p>
 <h3 id="javascript-setup">Javascript setup</h3>
 <p>Fortunately webcomponents already have the functionally to observe attributes. We can simply declare an attribute as observable using a built-in funciton. This allows for hot-switching instead of only loading the attribute once in the beginning.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kr">static</span> <span class="nx">get</span> <span class="nx">observedAttributes</span><span class="p">()</span> <span class="p">{</span>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-js"><span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copy to clipboard"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kr">static</span> <span class="nx">get</span> <span class="nx">observedAttributes</span><span class="p">()</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="p">[</span><span class="s1">&#39;theme&#39;</span><span class="p">];</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><p>Each time the value changes the triggered event can be observed with yet another built-in method. It&rsquo;s usually a good idea to check for the validity of this <code>newVal</code> and if it actually corresponds to our attribute. This is increasingly important if we observe more than just one attribute.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">attributeChangedCallback</span><span class="p">(</span><span class="nx">attrName</span><span class="p">,</span> <span class="nx">oldVal</span><span class="p">,</span> <span class="nx">newVal</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></div></div><p>Each time the value changes the triggered event can be observed with yet another built-in method. It&rsquo;s usually a good idea to check for the validity of this <code>newVal</code> and if it actually corresponds to our attribute. This is increasingly important if we observe more than just one attribute.</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-js"><span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copy to clipboard"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">attributeChangedCallback</span><span class="p">(</span><span class="nx">attrName</span><span class="p">,</span> <span class="nx">oldVal</span><span class="p">,</span> <span class="nx">newVal</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="nx">attrName</span> <span class="o">==</span> <span class="s2">&#34;theme&#34;</span> <span class="o">&amp;&amp;</span> <span class="nx">newVal</span> <span class="o">&amp;&amp;</span> <span class="nx">oldVal</span> <span class="o">!==</span> <span class="nx">newVal</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    	<span class="c1">// act on new theme
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><p>Using a lookup table we can then handle predefined themes, which makes it easier to embed. If the given value is not found in the table, we assume that it must be an url to an external file.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">themes</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></div></div><p>Using a lookup table we can then handle predefined themes, which makes it easier to embed. If the given value is not found in the table, we assume that it must be an url to an external file.</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-js"><span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copy to clipboard"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">themes</span> <span class="o">=</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="k">default</span><span class="o">:</span> <span class="s2">&#34;assets/themes/default.json&#34;</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">      <span class="nx">dark</span><span class="o">:</span> <span class="s2">&#34;assets/themes/dark.json&#34;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">url</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">themes</span><span class="p">[</span><span class="nx">newVal</span><span class="p">]</span> <span class="o">??</span> <span class="nx">newVal</span><span class="p">;</span>
-</span></span></code></pre></div><p>The corresponding internal or external file is then loaded, parsed as json and each css property is updated. You can find an example for such theme file on <a href="https://xyquadrat.ch/polyring/assets/themes/default.json" target="_blank" rel="noopener noreffer ">xyquadrat</a>.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="p">=&gt;</span> <span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">url</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">themes</span><span class="p">[</span><span class="nx">newVal</span><span class="p">]</span> <span class="o">??</span> <span class="nx">newVal</span><span class="p">;</span></span></span></code></pre></div></div><p>The corresponding internal or external file is then loaded, parsed as json and each css property is updated. You can find an example for such theme file on <a href="https://xyquadrat.ch/polyring/assets/themes/default.json" target="_blank" rel="noopener noreffer ">xyquadrat</a>.</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-js"><span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copy to clipboard"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="p">=&gt;</span> <span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">())</span>
 </span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">val</span> <span class="p">=&gt;</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    	<span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">item</span> <span class="k">in</span> <span class="nx">val</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        	<span class="k">this</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">setProperty</span><span class="p">(</span><span class="nx">item</span><span class="p">,</span> <span class="nx">val</span><span class="p">[</span><span class="nx">item</span><span class="p">]);</span>
@@ -120,22 +145,34 @@ A Web Component itself is simply a custom element like any other default html el
 </span></span><span class="line"><span class="cl">	<span class="p">}).</span><span class="k">catch</span><span class="p">(</span> <span class="nx">val</span> <span class="p">=&gt;</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    	<span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">val</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="p">});</span> 
-</span></span></code></pre></div><h3 id="css-setup">CSS setup</h3>
+</span></span></code></pre></div></div><h3 id="css-setup">CSS setup</h3>
 <p>A <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties" target="_blank" rel="noopener noreffer ">css variable </a> or css custom property can be used with the <code>var</code> function in css. For example for the webring-banner:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="p">.</span><span class="nc">webring-banner</span> <span class="p">{</span>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-css"><span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copy to clipboard"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="p">.</span><span class="nc">webring-banner</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">background-color</span><span class="p">:</span> <span class="nf">var</span><span class="p">(</span><span class="o">--</span><span class="n">background</span><span class="o">-</span><span class="kc">color</span><span class="p">,</span> <span class="mh">#FFF</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="k">border</span><span class="p">:</span> <span class="mi">1</span><span class="kt">px</span> <span class="kc">solid</span> <span class="nf">var</span><span class="p">(</span><span class="o">--</span><span class="n">outer</span><span class="o">-</span><span class="n">border</span><span class="o">-</span><span class="kc">color</span><span class="p">,</span> <span class="mh">#DDD</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><p>Take note that <code>var</code>allows passing a default value in the format: <code>var(--my-variable, default_value)</code>, but it is not necessary. Basically every kind of css parameter can be used in a variable, so you could have dynamic borders or even hide an element in one theme. These variables can also be stacked to allow for both broad and specific control:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="p">.</span><span class="nc">webring-banner__info</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></div></div><p>Take note that <code>var</code>allows passing a default value in the format: <code>var(--my-variable, default_value)</code>, but it is not necessary. Basically every kind of css parameter can be used in a variable, so you could have dynamic borders or even hide an element in one theme. These variables can also be stacked to allow for both broad and specific control:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-css"><span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copy to clipboard"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="p">.</span><span class="nc">webring-banner__info</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">	<span class="k">border</span><span class="p">:</span> <span class="mi">2</span><span class="kt">px</span> <span class="kc">solid</span> <span class="nf">var</span><span class="p">(</span><span class="o">--</span><span class="n">inner</span><span class="o">-</span><span class="n">border</span><span class="o">-</span><span class="kc">color</span><span class="p">,</span> <span class="nf">var</span><span class="p">(</span><span class="o">--</span><span class="n">outer</span><span class="o">-</span><span class="n">border</span><span class="o">-</span><span class="kc">color</span><span class="p">,</span> <span class="mh">#DDD</span><span class="p">));</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><p>Additionally if you&rsquo;re using scss and aren&rsquo;t keen on repeating the same var function for each component that uses these properties, you can integrate them with scss variables:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-scss" data-lang="scss"><span class="line"><span class="cl"><span class="nv">$text-color</span><span class="o"> :</span> <span class="nf">var</span><span class="p">(</span><span class="o">--</span><span class="n">core-text-color</span><span class="o">,</span> <span class="no">black</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></div></div><p>Additionally if you&rsquo;re using scss and aren&rsquo;t keen on repeating the same var function for each component that uses these properties, you can integrate them with scss variables:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-scss"><span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copy to clipboard"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-scss" data-lang="scss"><span class="line"><span class="cl"><span class="nv">$text-color</span><span class="o"> :</span> <span class="nf">var</span><span class="p">(</span><span class="o">--</span><span class="n">core-text-color</span><span class="o">,</span> <span class="no">black</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="nc">.text</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">	<span class="na">color</span><span class="o">:</span> <span class="nv">$text-color</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><p>Unfortunately these css custom properties can not be used in scss functions like <code>scale-color</code>. As those are parsed at build time, but the value from a css variables is only present at run time. However css variables can be used in css functions like <code>calc</code>.</p>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></div></div><p>Unfortunately these css custom properties can not be used in scss functions like <code>scale-color</code>. As those are parsed at build time, but the value from a css variables is only present at run time. However css variables can be used in css functions like <code>calc</code>.</p>
 <h3 id="conclusion">Conclusion</h3>
 <p>Css custom properties allow for relatively easy theme support both to your website as well as webcomponents. Many css frameworks like <a href="https://materializecss.com/" target="_blank" rel="noopener noreffer ">Materialize</a> or <a href="https://getbootstrap.com/" target="_blank" rel="noopener noreffer ">Bootstrap</a> make heavy use of css variables to style elements dynamically.</p>]]></description></item></channel></rss>
