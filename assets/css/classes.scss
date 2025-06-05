@@ -1,0 +1,8 @@
+.code-title.has-title::after {
+    content: none !important;
+}
+
+.code-filename {
+    margin-left: 0.5rem;
+    font-weight: bold;
+}
